@@ -1,0 +1,13 @@
+{
+    "name": "hugsbrugs/php-security",
+    "description": "PHP Security Utilities",
+    "authors": [
+        {
+            "name": "Hugo Maugey",
+            "email": "hugo@maugey.fr"
+        }
+    ],
+    "autoload":{
+    	"psr-4": {"Hug\\": "src/Hug/"}
+    }
+}
