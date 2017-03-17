@@ -32,7 +32,11 @@ Clean input received by HTML forms to prevent injection
 ```php
 Security::sanitize($input);
 ```
-# php-sms-freemobile
+
+Generates random password
+```php
+Security::password($length = 15, $simple = false);
+```
 
 ## Unit Tests
 

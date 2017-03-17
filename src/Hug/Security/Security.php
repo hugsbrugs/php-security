@@ -83,4 +83,40 @@ class Security
         }
         return $output;
     }
+
+    /**
+     * Generates more or less complex passwords
+     *
+     * Generates a password containing non-accented letters (uppercase and lowercase) and digits and special characters (-=~!$^*()_<>?;[]{}|)
+     * USE option simple=true for FTP passwords since some special chars make FTP connection fucked up !
+     *
+     * @param int $length Password length (default 15)
+     *
+     * @return string $password password
+     *
+     */
+    public static function password($length = 15, $simple = false)
+    {
+        $password = false;
+        if(is_integer($length) && $length>6)
+        {
+            # Default chars for complex passwords
+            $chars =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.'0123456789-=~!$^*()_<>?;[]{}|';
+            
+            if($simple)
+            {
+                $chars =  'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            }
+
+            $password = '';
+            $max = strlen($chars) - 1;
+
+            for ($i=0; $i < $length; $i++)
+            {
+                $password .= $chars[mt_rand(0, $max)];
+            }
+        }
+        return $password;
+    }
+    
 }
