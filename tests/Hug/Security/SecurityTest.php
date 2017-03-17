@@ -95,4 +95,28 @@ final class SecurityTest extends TestCase
 
     }
 
+    /* ************************************************* */
+    /* ************* Security::password ************* */
+    /* ************************************************* */
+
+    /**
+     *
+     */
+    public function testCanPassword()
+    {
+        $test = Security::password(10);
+        $this->assertInternalType('string', $test);
+
+        $test = Security::password(15, true);
+        $this->assertInternalType('string', $test);
+
+        $test = Security::password('coucou', true);
+        $this->assertInternalType('boolean', $test);
+        $this->assertFalse($test);
+
+        $test = Security::password(4, true);
+        $this->assertInternalType('boolean', $test);
+        $this->assertFalse($test);
+    }
+
 }
