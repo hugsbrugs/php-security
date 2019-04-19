@@ -17,7 +17,7 @@ final class SecurityTest extends TestCase
     public $valid_input;
     public $invalid_input;
 
-    function __construct()
+    function setUp(): void
     {
         $this->valid_input = file_get_contents(__DIR__ . '/../../data/hugo-maugey-fr-valid.html');
         $this->invalid_input = file_get_contents(__DIR__ . '/../../data/hugo-maugey-fr-invalid.html');
@@ -33,7 +33,7 @@ final class SecurityTest extends TestCase
     public function testCanGetPayload()
     {
         $test = Security::get_payload($url = 'https://hugo.maugey.fr', $uid = 54, $role = 'user', $demo = false);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
     }
 
     /**
@@ -42,7 +42,7 @@ final class SecurityTest extends TestCase
     public function testCannotGetPayload()
     {
         $test = Security::get_payload($url = 'hugo.maugey.fr', $uid = null, $role = null, $demo = true);
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
 
     }
 
@@ -57,7 +57,7 @@ final class SecurityTest extends TestCase
     {
         $input = $this->valid_input;
         $test = Security::clean_input($input);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /**
@@ -67,7 +67,7 @@ final class SecurityTest extends TestCase
     {
         $input = $this->invalid_input;
         $test = Security::clean_input($input);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /* ************************************************* */
@@ -81,7 +81,7 @@ final class SecurityTest extends TestCase
     {
         $input = $this->valid_input;
         $test = Security::sanitize($input);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
     }
 
     /**
@@ -91,7 +91,7 @@ final class SecurityTest extends TestCase
     {
         $input = $this->invalid_input;
         $test = Security::sanitize($input);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
 
     }
 
@@ -105,17 +105,17 @@ final class SecurityTest extends TestCase
     public function testCanPassword()
     {
         $test = Security::password(10);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
 
         $test = Security::password(15, true);
-        $this->assertInternalType('string', $test);
+        $this->assertIsString($test);
 
         $test = Security::password('coucou', true);
-        $this->assertInternalType('boolean', $test);
+        $this->assertIsBool($test);
         $this->assertFalse($test);
 
         $test = Security::password(4, true);
-        $this->assertInternalType('boolean', $test);
+        $this->assertIsBool($test);
         $this->assertFalse($test);
     }
 
